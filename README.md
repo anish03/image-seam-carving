@@ -1,5 +1,4 @@
-# 
-Seam Carving for Content-Aware Image Resizing
+# Seam Carving for Content-Aware Image Resizing
 
 ## Summary
 Resizing the image using seam-carving technique.  
