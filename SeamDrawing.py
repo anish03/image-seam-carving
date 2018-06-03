@@ -1,15 +1,12 @@
 import numpy as np
 import operator
+import energy_function as ef
 
-
-def seam_drawing():
-    row_val = 5
-    col_val = 5
-    e = np.random.randint(1, 100, size=(row_val, col_val))
+def seam_drawing(e):
     m = np.copy(e)
+    row_val, col_val = e.shape
 
     upper_index = np.zeros((row_val, col_val), dtype=int)
-
     for i in range(1, row_val):
         for j in range(col_val):
             if j == 0:
@@ -43,7 +40,11 @@ def seam_drawing():
 
 
 def main():
-    seam_drawing()
+    # row_val = 5
+    # col_val = 5
+    # e = np.random.randint(1, 100, size=(row_val, col_val))
+    e = ef.cal_energy("jeremy.png")
+    seam_drawing(e)
 
 
 if __name__ == '__main__':
