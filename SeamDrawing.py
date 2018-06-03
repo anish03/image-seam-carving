@@ -1,6 +1,7 @@
 import numpy as np
 import operator
 import energy_function as ef
+import cv2
 
 def seam_drawing(e):
     m = np.copy(e)
@@ -36,14 +37,19 @@ def seam_drawing(e):
         seam.append((row - 1, col + upper_index[row][col]))
         row -= 1
 
-    print seam
+    # print seam
+    img = cv2.imread("dolphinstretch2.png")
+    for i in seam:
+        img[i[0], i[1]] = [0, 255, 0]
 
+    cv2.imwrite("dolphin2.jpg", img)
 
 def main():
     # row_val = 5
     # col_val = 5
     # e = np.random.randint(1, 100, size=(row_val, col_val))
-    e = ef.cal_energy("jeremy.png")
+    img = "dolphinstretch2.png"
+    e = ef.cal_energy(img)
     seam_drawing(e)
 
 
