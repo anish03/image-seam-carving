@@ -37,27 +37,27 @@ def cal_energy(image_path):
                 for i in range(r-1,r+2):
                     for j in range(c,c+2):
                         for rgb in range(0,3):
-                            energy_img[r,c] += abs(img[i,j][rgb] - img[r,c][rgb]) / 3
+                            energy_img[r,c] += abs(img[i,j][rgb] - img[r,c][rgb]) / 5
             elif c == cols - 1:
                 for i in range(r-1,r+2):
                     for j in range(c-1,c+1):
                         for rgb in range(0,3):
-                            energy_img[r,c] += abs(img[i,j][rgb] - img[r,c][rgb]) / 3
+                            energy_img[r,c] += abs(img[i,j][rgb] - img[r,c][rgb]) / 5
             elif r == 0:
                 for i in range(r,r+2):
                     for j in range(c-1,c+2):
                         for rgb in range(0,3):
-                            energy_img[r,c] += abs(img[i,j][rgb] - img[r,c][rgb]) / 3
+                            energy_img[r,c] += abs(img[i,j][rgb] - img[r,c][rgb]) / 5
             elif r == rows - 1:
                 for i in range(r-1,r+1):
                     for j in range(c-1,c+2):
                         for rgb in range(0,3):
-                            energy_img[r,c] += abs(img[i,j][rgb] - img[r,c][rgb]) / 3
+                            energy_img[r,c] += abs(img[i,j][rgb] - img[r,c][rgb]) / 5
             else:
                 for i in range(r-1,r+2):
                     for j in range(c-1,c+2):
                         for rgb in range(0,3):
                             if i!=r and j!=c:
-                                energy_img[r,c] += abs(img[i,j][rgb] - img[r,c][rgb]) / 3
+                                energy_img[r,c] += abs(img[i,j][rgb] - img[r,c][rgb]) / 8
 
     return energy_img
