@@ -1,6 +1,6 @@
 import numpy as np
 import operator
-import energy_function as ef
+import energy_function_8C as ef
 import cv2
 
 def seam_drawing(e):
@@ -42,7 +42,7 @@ def seam_drawing(e):
     for i in seam:
         img[i[0], i[1]] = [0, 255, 0]
 
-    cv2.imwrite("dolphin2.jpg", img)
+    cv2.imwrite("dolphin2_n.jpg", img)
 
 def main():
     # row_val = 5
