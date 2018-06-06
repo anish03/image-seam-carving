@@ -3,7 +3,8 @@ import operator
 import energy_function_8C as ef
 import cv2
 
-def seam_drawing(e):
+
+def calculateSeam(e):
     m = np.copy(e)
     row_val, col_val = e.shape
 
@@ -37,20 +38,49 @@ def seam_drawing(e):
         seam.append((row - 1, col + upper_index[row][col]))
         row -= 1
 
-    # print seam
-    img = cv2.imread("dolphinstretch2.png")
+    return seam
+
+
+def drawSeam(seam, inp_file, op_file):
+    img = cv2.imread(inp_file)
     for i in seam:
         img[i[0], i[1]] = [0, 255, 0]
+    cv2.imwrite(op_file, img)
 
-    cv2.imwrite("dolphin2_n.jpg", img)
+
+def deleteSeam(seam, inp_file, op_file):
+    """
+    Partially complete function
+    Need some more tuning
+    1. Needs shift implementation: Left and right shifting of pixels : In progress
+    Current implementation left shift
+    :param seam:
+    :param inp_file:
+    :param op_file:
+    :return:
+    """
+    # d = {x: 1 for x in seam}
+    seam = seam[::-1]
+    img = cv2.imread(inp_file)
+    row_val, col_val, channels = img.shape
+    # One less column for seam removal
+    blank_image = np.zeros((row_val, col_val - 1, channels), np.uint8)
+    for i in range(row_val):
+        shift_start = seam[i][1]
+        for j in range(shift_start):
+            blank_image[i][j] = img[i][j]
+        for j in range(shift_start, col_val - 1):
+            blank_image[i][j] = img[i][j + 1]
+
+    cv2.imwrite(op_file, blank_image)
+
 
 def main():
-    # row_val = 5
-    # col_val = 5
-    # e = np.random.randint(1, 100, size=(row_val, col_val))
     img = "dolphinstretch2.png"
     e = ef.cal_energy(img)
-    seam_drawing(e)
+    s = calculateSeam(e)
+    print s
+    deleteSeam(s, img, "abc.png")
 
 
 if __name__ == '__main__':
