@@ -22,7 +22,7 @@ def cal_energy(image_path):
             R_x = abs(img[r,c-1][0] - img[r,C][0])
             G_x = abs(img[r,c-1][1] - img[r,C][1])
             B_x = abs(img[r,c-1][2] - img[r,C][2])
-            del_x = math.sqrt((R_x**2) + (G_x**2) + (B_x**2))
+            del_x = (R_x**2) + (G_x**2) + (B_x**2)
 
             if r == rows-1:
                 R = 0
@@ -32,8 +32,8 @@ def cal_energy(image_path):
             R_y = abs(img[r-1,c][0] - img[R,c][0])
             G_y = abs(img[r-1,c][1] - img[R,c][1])
             B_y = abs(img[r-1,c][2] - img[R,c][2])
-            del_y = math.sqrt((R_y**2) + (G_y**2) + (B_y**2))
+            del_y = (R_y**2) + (G_y**2) + (B_y**2)
 
-            energy_img[r,c] = del_x + del_y
+            energy_img[r,c] = math.sqrt(del_x + del_y)
 
     return energy_img
