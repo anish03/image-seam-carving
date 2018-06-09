@@ -1,10 +1,10 @@
 import numpy as np
 import operator
-import energy_function_8C as ef
+import dual_gradient as ef
 import cv2
 
 
-def calculateSeam(e):
+def calculate_seam(e):
     m = np.copy(e)
     row_val, col_val = e.shape
 
@@ -41,14 +41,14 @@ def calculateSeam(e):
     return seam
 
 
-def drawSeam(seam, inp_file, op_file):
+def draw_seam(seam, inp_file, op_file):
     img = cv2.imread(inp_file)
     for i in seam:
         img[i[0], i[1]] = [0, 255, 0]
     cv2.imwrite(op_file, img)
 
 
-def deleteSeam(seam, inp_file, op_file):
+def delete_vertical_seam(seam, inp_file, op_file):
     """
     Partially complete function
     Need some more tuning
@@ -64,23 +64,53 @@ def deleteSeam(seam, inp_file, op_file):
     img = cv2.imread(inp_file)
     row_val, col_val, channels = img.shape
     # One less column for seam removal
-    blank_image = np.zeros((row_val, col_val - 1, channels), np.uint8)
+    new_image = np.zeros((row_val, col_val - 1, channels), np.uint8)
     for i in range(row_val):
         shift_start = seam[i][1]
         for j in range(shift_start):
-            blank_image[i][j] = img[i][j]
+            new_image[i][j] = img[i][j]
         for j in range(shift_start, col_val - 1):
-            blank_image[i][j] = img[i][j + 1]
+            new_image[i][j] = img[i][j + 1]
 
-    cv2.imwrite(op_file, blank_image)
+    cv2.imwrite(op_file, new_image)
+
+
+def rotate_image(img, angle):
+    row, col, channels = img.shape
+    mat = cv2.getRotationMatrix2D((col/2, row/2), angle, 1)
+    img = cv2.warpAffine(img, mat, (col, row))
+    return img
+
+
+def horizontal_seam_carving(img_path, iterations):
+    # Rotate the image
+    img = cv2.imread(img_path)
+    cv2.imwrite(img_path, rotate_image(img, 90))
+
+    for i in range(iterations):
+        e = ef.cal_energy(img_path)
+        s = calculate_seam(e)
+        delete_vertical_seam(s, img_path, img_path)
+
+    # Rotate the image back to original dimension
+    img = cv2.imread(img_path)
+    cv2.imwrite("test2.png", rotate_image(img, -90))
+
+    print "Horizontal seam removal operations complete"
+
+
+def vertical_seam_carving(img, iterations):
+    for i in range(iterations):
+        e = ef.cal_energy(img)
+        s = calculate_seam(e)
+        delete_vertical_seam(s, img, img)
+    print "Vertical seam removal operations complete"
 
 
 def main():
-    img = "dolphinstretch2.png"
-    e = ef.cal_energy(img)
-    s = calculateSeam(e)
-    print s
-    deleteSeam(s, img, "abc.png")
+    img = "test.png"
+    vertical_seam_carving(img, 100)
+    # horizontal_seam_carving(img, 40)
 
 
 if __name__ == '__main__':
