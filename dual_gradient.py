@@ -4,13 +4,22 @@ import warnings
 import math
 
 def cal_energy(image_path):
+
+    '''
+    :param image_path: Source image path
+    :return: Energy value for each pixel in the image
+    '''
+
     warnings.simplefilter("ignore",RuntimeWarning)
 
+    #Original image
     img = scipy.misc.imread(image_path,flatten=False,mode='RGB')
+
+    #Dimensions of the original image
     rows,cols = img.shape[0:2]
 
+    #Mask for energy values
     energy_img = np.ndarray(shape=(rows,cols),dtype='int')
-
 
     for r in range(0,rows):
         for c in range(0,cols):
