@@ -9,7 +9,7 @@ Seam carving is a technique that allows for content-aware image resizing for bot
 * Used dual-gradient energy function to calculate the energy for each pixel in the image.
 
 ### Energy Function Calculation
-![EF](https://github.com/anish03/image-seam-carving/blob/master/TestImages/ef_.png = 250x250)
+![EF](https://github.com/anish03/image-seam-carving/blob/master/TestImages/ef_.png | width = 100)
 
 * Used dynamic programming to identify the seam (a connected path of low energy pixels) and then deleted the seam.
 * Implemented seam-carving for both, vertical and horizontal image resizing.
