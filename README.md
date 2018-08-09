@@ -29,6 +29,18 @@ Resized image after running 100 iterations.
 ![SeamCarving2](https://github.com/anish03/image-seam-carving/blob/master/TestImages/test.png)
 
 
+## How to use
+
+```
+git clone https://github.com/anish03/image-seam-carving.git
+
+pip install -r requirements.txt
+
+python seam_drawing.py
+
+```
+
+
 ## Contributors
 
 * Neeraj Kulkarni - [xOmega](https://github.com/xOmega)
