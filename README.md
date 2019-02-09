@@ -31,15 +31,15 @@ Resized image after running 100 iterations.
 
 ## How to use
 
-Clone Repository
+### Clone Repository
 ```
 git clone https://github.com/anish03/image-seam-carving.git
 ```
-Install dependencies
+### Install dependencies
 ```
 pip install -r requirements.txt
 ```
-Run
+### Run
 ```
 python seam_drawing.py
 
