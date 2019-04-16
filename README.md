@@ -18,16 +18,6 @@ energy_value(x,y) = math.sqrt((delta_x(x,y) ** 2 + (delta_y(x,y) ** 2))
 * Used dynamic programming to identify the seam (a connected path of low energy pixels) and then deleted the seam.
 * Implemented seam-carving for both, vertical and horizontal image resizing.
 
-## Results
-
-Resized image after running 100 iterations.
-
-### Before
-![SeamCarving1](https://github.com/anish03/image-seam-carving/blob/master/TestImages/dolphinstretch2.png)
-
-### After
-![SeamCarving2](https://github.com/anish03/image-seam-carving/blob/master/TestImages/test.png)
-
 
 ## How to use
 
