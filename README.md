@@ -10,8 +10,8 @@ Seam carving is a technique that allows for content-aware image resizing for bot
 ```python
 import math
 
-delta_x(x,y) ** 2 = R_x(x,y) ** 2 + G_x(x,y) ** 2 + G_x(x,y) ** 2
-delta_y(x,y) ** 2 = R_y(x,y) ** 2 + G_y(x,y) ** 2 + G_y(x,y) ** 2
+delta_x(x,y) ** 2 = R_x(x,y) ** 2 + G_x(x,y) ** 2 + B_x(x,y) ** 2
+delta_y(x,y) ** 2 = R_y(x,y) ** 2 + G_y(x,y) ** 2 + B_y(x,y) ** 2
 
 energy_value(x,y) = math.sqrt((delta_x(x,y) ** 2 + (delta_y(x,y) ** 2))
 ```
